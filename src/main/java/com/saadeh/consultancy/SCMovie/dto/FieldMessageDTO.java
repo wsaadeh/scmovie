@@ -1,21 +1,15 @@
 package com.saadeh.consultancy.SCMovie.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class FieldMessageDTO {
 	
 	private String fieldName;
     private String message;
-
-    public FieldMessageDTO(String fieldName, String message) {
-        this.fieldName = fieldName;
-        this.message = message;
-    }
-
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 
 }

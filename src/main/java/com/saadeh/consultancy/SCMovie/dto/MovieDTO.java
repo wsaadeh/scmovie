@@ -4,12 +4,18 @@ import com.saadeh.consultancy.SCMovie.entities.MovieEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class MovieDTO {
 
 	private static final DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
@@ -30,39 +36,8 @@ public class MovieDTO {
 	@URL(message = "Field must be a valid url")
 	private String image;
 
-	public MovieDTO() {
-	}
-
-	public MovieDTO(Long id, String title, Double score, Integer count, String image) {
-		this.id = id;
-		this.title = title;
-		this.score = Double.valueOf(df.format(score));
-		this.count = count;
-		this.image = image;
-	}
-
 	public MovieDTO(MovieEntity movie) {
 		this(movie.getId(), movie.getTitle(), movie.getScore(), movie.getCount(), movie.getImage());
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public Double getScore() {
-		return score;
-	}
-	
-	public Integer getCount() {
-		return count;
-	}
-
-	public String getImage() {
-		return image;
 	}
 
 	@Override
