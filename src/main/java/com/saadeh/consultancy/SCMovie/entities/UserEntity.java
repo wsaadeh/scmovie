@@ -12,7 +12,6 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_user")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class UserEntity implements UserDetails {
@@ -30,6 +29,13 @@ public class UserEntity implements UserDetails {
 	@ManyToMany
 	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<RoleEntity> roles = new HashSet<>();
+
+	public UserEntity(Long id, String name, String username, String password) {
+		this.id = id;
+		this.name = name;
+		this.username = username;
+		this.password = password;
+	}
 
     public void addRole(RoleEntity role) {
     	roles.add(role);
