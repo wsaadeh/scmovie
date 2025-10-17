@@ -2,6 +2,7 @@ package com.saadeh.consultancy.SCMovie.tests;
 
 import com.saadeh.consultancy.SCMovie.dto.MovieDTO;
 import com.saadeh.consultancy.SCMovie.entities.MovieEntity;
+import com.saadeh.consultancy.SCMovie.entities.ScoreEntity;
 
 public class MovieFactory {
 	

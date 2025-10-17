@@ -83,9 +83,47 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version> <!--$NO-MVN-MAN-VER$ -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
-
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.13</version>
+				<configuration>
+					<excludes>
+						<exclude>com/saadeh/consultancy/SCMovie/ScMovieApplication.class</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/config/**</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/entities/**</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/dto/**</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/controllers/**</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/controllers/handlers/**</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/services/exceptions/**</exclude>
+						<exclude>com/saadeh/consultancy/SCMovie/utils/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/jacoco-report</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
