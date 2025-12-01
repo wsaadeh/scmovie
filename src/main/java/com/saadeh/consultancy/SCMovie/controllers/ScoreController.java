@@ -3,6 +3,9 @@ package com.saadeh.consultancy.SCMovie.controllers;
 import com.saadeh.consultancy.SCMovie.dto.MovieDTO;
 import com.saadeh.consultancy.SCMovie.dto.ScoreDTO;
 import com.saadeh.consultancy.SCMovie.services.ScoreService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/scores")
+@Tag(name = "Score", description = "Controller for Score movie")
 public class ScoreController {
 	
 	@Autowired
 	private ScoreService service;
-	
+
+
+	@Operation(description = "Endpoint for save score",
+			summary = "Save score",
+			responses = {
+					@ApiResponse(description = "OK", responseCode = "200"),
+					@ApiResponse(description = "Bad Request", responseCode = "400"),
+					@ApiResponse(description = "Unauthorized", responseCode = "401"),
+					@ApiResponse(description = "Forbidden", responseCode = "403"),
+					@ApiResponse(description = "Not Found", responseCode = "404"),
+					@ApiResponse(description = "Unprocessable Entity", responseCode = "422")
+			})
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
-	@PutMapping
+	@PutMapping(produces = "application/json")
 	public ResponseEntity<MovieDTO> saveScore(@Valid @RequestBody ScoreDTO dto) {
 		MovieDTO movieDTO = service.saveScore(dto);
 		return ResponseEntity.ok().body(movieDTO);
