@@ -1,6 +1,7 @@
 package com.saadeh.consultancy.SCMovie.services;
 
 import com.saadeh.consultancy.SCMovie.dto.MovieDTO;
+import com.saadeh.consultancy.SCMovie.dto.MovieGenreDTO;
 import com.saadeh.consultancy.SCMovie.entities.MovieEntity;
 import com.saadeh.consultancy.SCMovie.repositories.MovieRepository;
 import com.saadeh.consultancy.SCMovie.services.exceptions.DatabaseException;
@@ -26,10 +27,23 @@ public class MovieService {
 	}
 
 	@Transactional(readOnly = true)
+	public Page<MovieGenreDTO> findAllMovieGenre(String title, Pageable pageable) {
+		Page<MovieEntity> result = repository.searchByTitle(title, pageable);
+		return result.map(x -> new MovieGenreDTO(x));
+	}
+
+	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
 		MovieEntity result = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 		return new MovieDTO(result);
+	}
+
+	@Transactional(readOnly = true)
+	public MovieGenreDTO findByIdMovieGenre(Long id) {
+		MovieEntity result = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+		return new MovieGenreDTO(result);
 	}
 
 	@Transactional

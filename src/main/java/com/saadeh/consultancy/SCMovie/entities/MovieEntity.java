@@ -2,7 +2,6 @@ package com.saadeh.consultancy.SCMovie.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldNameConstants;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -28,6 +27,10 @@ public class MovieEntity {
 	private Integer count;
 
 	private String image;
+
+	@ManyToOne
+	@JoinColumn(name = "genre_id")
+	private GenreEntity genre;
 
 	@OneToMany(mappedBy = "id.movie")
 	@Setter(AccessLevel.PRIVATE)
