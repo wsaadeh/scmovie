@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -17,7 +18,7 @@ import java.util.Locale;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class MovieDTO {
+public class MovieDTO extends RepresentationModel<MovieDTO> {
 
 	private static final DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
 

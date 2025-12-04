@@ -1,6 +1,7 @@
 package com.saadeh.consultancy.SCMovie.controllers;
 
 import com.saadeh.consultancy.SCMovie.dto.MovieDTO;
+import com.saadeh.consultancy.SCMovie.dto.MovieGenreDTO;
 import com.saadeh.consultancy.SCMovie.services.MovieService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -37,6 +38,19 @@ public class MovieController {
         return service.findAll(title, pageable);
     }
 
+    @Operation(description = "Get all movies",
+            summary = "List of movies",
+            responses = {
+                    @ApiResponse(description = "OK", responseCode = "200"),
+
+            })
+    @GetMapping(produces = "application/vdn.saadeh.consultancy.SCMovie-v1+json")
+    public Page<MovieGenreDTO> findAllV1(
+            @RequestParam(value = "title", defaultValue = "") String title,
+            Pageable pageable) {
+        return service.findAllMovieGenre(title, pageable);
+    }
+
 
     @Operation(description = "Get movie by id",
             summary = "Get movie by id",
@@ -47,6 +61,17 @@ public class MovieController {
     @GetMapping(value = "/{id}",produces = "application/json")
     public MovieDTO findById(@PathVariable Long id) {
         return service.findById(id);
+    }
+
+    @Operation(description = "Get movie by id",
+            summary = "Get movie by id",
+            responses = {
+                    @ApiResponse(description = "OK", responseCode = "200"),
+                    @ApiResponse(description = "Not Found", responseCode = "404"),
+            })
+    @GetMapping(value = "/{id}",produces = "application/vdn.saadeh.consultancy.SCMovie-v1+json")
+    public MovieGenreDTO findByIdV1(@PathVariable Long id) {
+        return service.findByIdMovieGenre(id);
     }
 
     @Operation(description = "Create a new movie",
